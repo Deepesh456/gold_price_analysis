@@ -17,17 +17,402 @@ st.set_page_config(
 )
 
 # Custom CSS
+# Replace the "Custom CSS" section in your code with this:
+
 st.markdown("""
     <style>
-    .main {padding: 0rem 1rem;}
-    .stMetric {
-        background-color: #f0f2f6;
-        padding: 15px;
-        border-radius: 10px;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    /* Import Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+    
+    /* Global Styles */
+    * {
+        font-family: 'Inter', sans-serif;
     }
-    h1 {color: #FF6B35; font-weight: 700;}
-    h2 {color: #004E89; font-weight: 600;}
+    
+    /* Main Background */
+    .stApp {
+        background-color: #0E1117;
+        color: #FAFAFA;
+    }
+    
+    /* Main Content Area */
+    .main {
+        padding: 0rem 2rem;
+        background-color: #0E1117;
+    }
+    
+    /* Sidebar Styling */
+    [data-testid="stSidebar"] {
+        background-color: #1A1D24;
+        border-right: 1px solid #2D3139;
+    }
+    
+    [data-testid="stSidebar"] [data-testid="stMarkdownContainer"] p {
+        color: #FAFAFA;
+    }
+    
+    /* Sidebar Image */
+    [data-testid="stSidebar"] img {
+        border-radius: 50%;
+        padding: 10px;
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    /* Title Styling */
+    h1 {
+        color: #FAFAFA !important;
+        font-weight: 700 !important;
+        font-size: 2.5rem !important;
+        margin-bottom: 0.5rem !important;
+    }
+    
+    h1::before {
+        content: "💰 ";
+        font-size: 2.5rem;
+    }
+    
+    h2 {
+        color: #B8BCC8 !important;
+        font-weight: 600 !important;
+        font-size: 1.5rem !important;
+    }
+    
+    h3 {
+        color: #FAFAFA !important;
+        font-weight: 600 !important;
+        font-size: 1.2rem !important;
+    }
+    
+    h4 {
+        color: #B8BCC8 !important;
+        font-weight: 500 !important;
+    }
+    
+    /* Metric Cards - Dark Theme */
+    [data-testid="stMetric"] {
+        background: linear-gradient(135deg, #1E2128 0%, #252930 100%);
+        padding: 1.5rem;
+        border-radius: 16px;
+        border: 1px solid #2D3139;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+        transition: all 0.3s ease;
+    }
+    
+    [data-testid="stMetric"]:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(255, 215, 0, 0.2);
+        border: 1px solid #FFD700;
+    }
+    
+    [data-testid="stMetric"] label {
+        color: #B8BCC8 !important;
+        font-size: 0.9rem !important;
+        font-weight: 500 !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    [data-testid="stMetric"] [data-testid="stMetricValue"] {
+        color: #FAFAFA !important;
+        font-size: 2rem !important;
+        font-weight: 700 !important;
+    }
+    
+    [data-testid="stMetric"] [data-testid="stMetricDelta"] {
+        font-size: 1rem !important;
+        font-weight: 600 !important;
+    }
+    
+    /* Positive/Negative Delta Colors */
+    [data-testid="stMetric"] [data-testid="stMetricDelta"] svg {
+        fill: currentColor;
+    }
+    
+    /* Buttons */
+    .stButton > button {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #0E1117;
+        border: none;
+        border-radius: 12px;
+        padding: 0.75rem 2rem;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+    
+    .stButton > button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(255, 215, 0, 0.5);
+        background: linear-gradient(135deg, #FFA500 0%, #FFD700 100%);
+    }
+    
+    /* Select Box / Dropdown */
+    .stSelectbox [data-baseweb="select"] {
+        background-color: #1E2128;
+        border: 1px solid #2D3139;
+        border-radius: 12px;
+    }
+    
+    .stSelectbox [data-baseweb="select"]:hover {
+        border-color: #FFD700;
+    }
+    
+    /* Slider */
+    .stSlider [data-baseweb="slider"] {
+        background-color: #2D3139;
+    }
+    
+    .stSlider [data-baseweb="slider"] [role="slider"] {
+        background-color: #FFD700;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    
+    .stSlider [data-baseweb="slider"] [data-testid="stTickBar"] {
+        background: linear-gradient(90deg, #2D3139 0%, #FFD700 100%);
+    }
+    
+    /* Info/Warning Boxes */
+    .stAlert {
+        background-color: #1E2128;
+        border: 1px solid #2D3139;
+        border-radius: 12px;
+        color: #FAFAFA;
+    }
+    
+    [data-baseweb="notification"] {
+        background-color: #1E2128;
+        border-left: 4px solid #FFD700;
+    }
+    
+    /* Dataframe */
+    [data-testid="stDataFrame"] {
+        background-color: #1E2128;
+        border: 1px solid #2D3139;
+        border-radius: 12px;
+    }
+    
+    [data-testid="stDataFrame"] table {
+        color: #FAFAFA;
+    }
+    
+    [data-testid="stDataFrame"] thead tr th {
+        background-color: #252930 !important;
+        color: #FFD700 !important;
+        font-weight: 600;
+    }
+    
+    [data-testid="stDataFrame"] tbody tr {
+        background-color: #1E2128;
+    }
+    
+    [data-testid="stDataFrame"] tbody tr:hover {
+        background-color: #252930;
+    }
+    
+    /* Chat Messages */
+    [data-testid="stChatMessage"] {
+        background-color: #1E2128;
+        border: 1px solid #2D3139;
+        border-radius: 12px;
+    }
+    
+    /* Chat Input */
+    [data-testid="stChatInput"] {
+        background-color: #1E2128;
+        border: 1px solid #2D3139;
+        border-radius: 12px;
+    }
+    
+    [data-testid="stChatInput"]:focus-within {
+        border-color: #FFD700;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+    }
+    
+    /* File Uploader */
+    [data-testid="stFileUploader"] {
+        background-color: #1E2128;
+        border: 2px dashed #2D3139;
+        border-radius: 12px;
+        padding: 2rem;
+    }
+    
+    [data-testid="stFileUploader"]:hover {
+        border-color: #FFD700;
+    }
+    
+    /* Divider */
+    hr {
+        border-color: #2D3139;
+        margin: 2rem 0;
+    }
+    
+    /* Plotly Chart Background */
+    .js-plotly-plot {
+        background-color: transparent !important;
+    }
+    
+    /* Tab Navigation */
+    .stTabs [data-baseweb="tab-list"] {
+        background-color: #1E2128;
+        border-radius: 12px;
+        padding: 0.5rem;
+    }
+    
+    .stTabs [data-baseweb="tab"] {
+        color: #B8BCC8;
+        background-color: transparent;
+        border-radius: 8px;
+        font-weight: 500;
+    }
+    
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        color: #0E1117;
+        font-weight: 600;
+    }
+    
+    /* Expander */
+    .streamlit-expanderHeader {
+        background-color: #1E2128;
+        border: 1px solid #2D3139;
+        border-radius: 12px;
+        color: #FAFAFA;
+        font-weight: 600;
+    }
+    
+    .streamlit-expanderHeader:hover {
+        border-color: #FFD700;
+    }
+    
+    /* Success/Error/Info Messages */
+    .stSuccess {
+        background-color: #1E3A28;
+        border-left: 4px solid #00C853;
+        color: #FAFAFA;
+    }
+    
+    .stError {
+        background-color: #3A1E1E;
+        border-left: 4px solid #FF5252;
+        color: #FAFAFA;
+    }
+    
+    .stInfo {
+        background-color: #1E2838;
+        border-left: 4px solid #2196F3;
+        color: #FAFAFA;
+    }
+    
+    .stWarning {
+        background-color: #3A2E1E;
+        border-left: 4px solid #FFC107;
+        color: #FAFAFA;
+    }
+    
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #1A1D24;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: #2D3139;
+        border-radius: 5px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: #FFD700;
+    }
+    
+    /* Select Slider Custom Styling */
+    [data-testid="stSelectSlider"] {
+        background-color: #1E2128;
+        padding: 1rem;
+        border-radius: 12px;
+        border: 1px solid #2D3139;
+    }
+    
+    /* Input Fields */
+    input, textarea {
+        background-color: #1E2128 !important;
+        color: #FAFAFA !important;
+        border: 1px solid #2D3139 !important;
+        border-radius: 8px !important;
+    }
+    
+    input:focus, textarea:focus {
+        border-color: #FFD700 !important;
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.2) !important;
+    }
+    
+    /* Number Input */
+    [data-testid="stNumberInput"] input {
+        background-color: #1E2128;
+        color: #FAFAFA;
+        border: 1px solid #2D3139;
+    }
+    
+    /* Markdown Content */
+    .stMarkdown {
+        color: #FAFAFA;
+    }
+    
+    /* Links */
+    a {
+        color: #FFD700;
+        text-decoration: none;
+    }
+    
+    a:hover {
+        color: #FFA500;
+        text-decoration: underline;
+    }
+    
+    /* Code Blocks */
+    code {
+        background-color: #1E2128;
+        color: #FFD700;
+        padding: 0.2rem 0.4rem;
+        border-radius: 4px;
+        font-family: 'Courier New', monospace;
+    }
+    
+    pre {
+        background-color: #1E2128;
+        border: 1px solid #2D3139;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+    
+    /* Radio Buttons */
+    [data-testid="stRadio"] label {
+        color: #B8BCC8;
+    }
+    
+    [data-testid="stRadio"] [role="radiogroup"] label:hover {
+        color: #FFD700;
+    }
+    
+    /* Checkbox */
+    [data-testid="stCheckbox"] label {
+        color: #B8BCC8;
+    }
+    
+    /* Animation for Page Load */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .main > div {
+        animation: fadeIn 0.5s ease-out;
+    }
     </style>
     """, unsafe_allow_html=True)
 
