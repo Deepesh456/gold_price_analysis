@@ -506,7 +506,7 @@ def show_dashboard(df, metrics):
     col1, col2, col3, col4 = st.columns(4)
     
     with col1:
-        st.metric("💰 Current Price", f"₹{metrics['current_price']:,.2f}", 
+        st.metric("Price Till 2021", f"₹{metrics['current_price']:,.2f}", 
                  f"{metrics['price_change_pct']:.2f}%")
     with col2:
         st.metric("📅 7-Day Change", f"₹{metrics['week_change']:,.2f}", 
